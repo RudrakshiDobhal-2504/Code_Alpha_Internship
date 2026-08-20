@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connectify — a modern social community for sharing, discovering and connecting.">
+  <meta name="theme-color" content="#6c5ce7">
+  <title>Connectify — Social Media Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="toast-root"></div>
+
+  <!-- AUTH -->
+  <section id="auth-screen" class="auth-shell">
+    <div class="auth-orb orb-one"></div>
+    <div class="auth-orb orb-two"></div>
+
+    <a class="auth-brand" href="#">
+      <span class="brand-mark">C</span>
+      <span>Connectify</span>
+    </a>
+
+    <div class="auth-card">
+      <div class="auth-icon">✦</div>
+
+      <div class="auth-heading">
+        <p class="eyebrow">YOUR PEOPLE. YOUR SPACE.</p>
+        <h1 id="auth-title">Welcome back</h1>
+        <p id="auth-subtitle">Sign in to continue to your community.</p>
+      </div>
+
+      <form id="auth-form">
+        <div id="name-field" class="field hidden">
+          <label for="name">Full name</label>
+          <input id="name" type="text" autocomplete="name" placeholder="Rudrakshi Dobhal">
+        </div>
+
+        <div id="username-field" class="field hidden">
+          <label for="username">Username</label>
+          <input id="username" type="text" autocomplete="username" placeholder="rudrakshi">
+        </div>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="current-password" placeholder="Minimum 8 characters" required>
+        </div>
+
+        <button class="primary-btn full" type="submit" id="auth-submit">
+          <span>Sign in</span><span>→</span>
+        </button>
+      </form>
+
+      <button class="text-btn" id="auth-switch">
+        Don't have an account? <strong>Create one</strong>
+      </button>
+
+      <p class="auth-note">By continuing, you agree to our community guidelines.</p>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <a class="brand" href="#" id="home-link">
+        <span class="brand-mark">C</span>
+        <span>Connectify</span>
+      </a>
+
+      <div class="topbar-center">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="user-search" placeholder="Search people, usernames..." aria-label="Search people">
+          <div id="search-results" class="search-results hidden"></div>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-btn notification-btn" id="notification-btn" title="Notifications" aria-label="Notifications">
+          ♧<i></i>
+        </button>
+
+        <button class="icon-btn" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☾</button>
+
+        <button class="avatar avatar-sm" id="top-avatar" aria-label="Open profile">U</button>
+      </div>
+
+      <div id="notification-panel" class="notification-panel hidden">
+        <div class="notification-head">
+          <strong>Notifications</strong>
+          <span>3 new</span>
+        </div>
+
+        <div class="notification-item">
+          <div class="notif-dot"></div>
+          <div>
+            <strong>Welcome to Connectify</strong>
+            <p>Your community is ready for you.</p>
+            <small>Just now</small>
+          </div>
+        </div>
+
+        <div class="notification-item">
+          <div class="notif-avatar">♥</div>
+          <div>
+            <strong>Your posts are live</strong>
+            <p>Share something with your community.</p>
+            <small>Today</small>
+          </div>
+        </div>
+
+        <div class="notification-item">
+          <div class="notif-avatar">+</div>
+          <div>
+            <strong>Discover new people</strong>
+            <p>Find creators and friends to follow.</p>
+            <small>Today</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT -->
+      <aside class="sidebar card">
+        <nav>
+          <button class="nav-item active" data-view="feed">
+            <span class="nav-icon">⌂</span><span>Home</span>
+          </button>
+
+          <button class="nav-item" data-view="profile">
+            <span class="nav-icon">◎</span><span>My Profile</span>
+          </button>
+
+          <button class="nav-item" data-view="settings">
+            <span class="nav-icon">⚙</span><span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-user">
+          <div class="avatar" id="side-avatar">U</div>
+          <div class="user-copy">
+            <strong id="side-name">User</strong>
+            <small id="side-username">@user</small>
+          </div>
+        </div>
+
+        <button class="logout-btn" id="logout-btn">
+          <span>↪</span> Log out
+        </button>
+      </aside>
+
+      <!-- CENTER -->
+      <section class="content">
+        <div id="feed-view">
+          <div class="page-heading">
+            <div class="heading-copy">
+              <span class="eyebrow">YOUR COMMUNITY</span>
+              <h1>Home feed</h1>
+              <p>See what your community is sharing today.</p>
+            </div>
+
+            <button class="secondary-btn" id="refresh-btn">
+              <span>↻</span> Refresh
+            </button>
+          </div>
+
+          <div class="stories card" id="stories"></div>
+
+          <article class="composer card">
+            <div id="composer-avatar" class="avatar">U</div>
+
+            <div class="composer-main">
+              <div class="composer-label">
+                <strong>Create a post</strong>
+                <span id="char-count">0 / 1000</span>
+              </div>
+
+              <textarea id="post-content" maxlength="1000" placeholder="Share an update, thought, photo or moment..."></textarea>
+
+              <div class="composer-footer">
+                <div class="composer-tools">
+                  <button type="button" class="tool-btn" title="Add image" onclick="document.getElementById('post-image').focus()">▧ <span>Photo</span></button>
+                  <input id="post-image" type="url" placeholder="Paste image URL (optional)">
+                </div>
+
+                <button class="primary-btn compact" id="post-btn">
+                  Post <span>→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <div class="feed-toolbar">
+            <div>
+              <strong>For you</strong>
+              <span>Fresh from your community</span>
+            </div>
+            <span class="online-pill"><i></i> Live</span>
+          </div>
+
+          <div id="feed" class="feed"></div>
+        </div>
+
+        <div id="profile-view" class="hidden"></div>
+        <div id="settings-view" class="hidden"></div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="rightbar">
+        <div class="card people-card">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">PEOPLE</span>
+              <h3>Discover people</h3>
+            </div>
+            <span class="tiny-arrow">→</span>
+          </div>
+
+          <div id="discover-users"></div>
+          <button class="see-all" id="discover-all">See everyone <span>→</span></button>
+        </div>
+
+        <div class="card trend-card">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">TRENDING</span>
+              <h3>What’s happening</h3>
+            </div>
+          </div>
+
+          <div class="trend">
+            <span>#</span>
+            <div><strong>BuildInPublic</strong><small>1.8K posts</small></div>
+          </div>
+
+          <div class="trend">
+            <span>#</span>
+            <div><strong>TechCommunity</strong><small>924 posts</small></div>
+          </div>
+
+          <div class="trend">
+            <span>#</span>
+            <div><strong>WeekendVibes</strong><small>642 posts</small></div>
+          </div>
+        </div>
+
+        <div class="card about-card">
+          <div class="about-logo">C</div>
+          <div>
+            <h3>Connectify</h3>
+            <p>Share moments, discover people and build your community.</p>
+          </div>
+
+          <div class="tech-pills">
+            <span>Node.js</span>
+            <span>Express</span>
+            <span>MongoDB</span>
+          </div>
+
+          <small class="copyright">© 2026 Connectify</small>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="modal-root"></div>
+  <script src="app.js"></script>
+</body>
+</html>
